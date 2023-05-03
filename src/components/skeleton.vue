@@ -19,13 +19,9 @@
 </template>
 
 <script>
-import repository from "@/views/repository/repository.vue";
-import Passage from "@/views/passage/passage.vue";
-
 export default {
 
   name: "skeleton",
-  components: {Passage,repository}
 }
 </script>
 

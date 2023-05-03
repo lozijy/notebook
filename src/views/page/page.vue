@@ -16,14 +16,15 @@
 </template>
 
 <script>
-import {reactive, ref} from 'vue'
+import {reactive, ref,inject} from 'vue'
 import axios from "axios";
 import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
 import {marked} from "marked";
 export default {
   setup() {
 
-
+      const credentials=inject('credentials');
+      console.log(credentials.owner);
       let state=reactive({
             array: [],
             path:[],
@@ -32,14 +33,13 @@ export default {
       )
       const octokit = new Octokit(
           {
-            auth: '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'
+            auth: credentials.token
           }
       )
     //获取根目录下的所有文件
       octokit.repos.getContent({
-        owner: 'lozijy',
-        repo: 'typora_notebook',
-
+        owner: credentials.owner,
+        repo: credentials.repo,
       }).then(result => {
         for (let i = 0; i < result.data.length; i++) {
           state.array.push(result.data[i]);
@@ -83,12 +83,12 @@ export default {
           console.log(state.string_path);
           const octokit = new Octokit(
               {
-                auth: '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'
+                auth: credentials.token
               }
           )
           octokit.repos.getContent({
-            owner: 'lozijy',
-            repo: 'typora_notebook',
+            owner: credentials.owner,
+            repo: credentials.repo,
             path:state.string_path
           }).then(result => {
             for (let i = 0; i < result.data.length; i++) {
@@ -100,8 +100,8 @@ export default {
           })
         }else if(item.type==="file"){
           octokit.repos.getContent({
-            owner: 'lozijy',
-            repo: 'typora_notebook',
+            owner: credentials.owner,
+            repo: credentials.repo,
             path: state.string_path
           }).then(result => {
             const content = result.data.content
@@ -125,12 +125,12 @@ export default {
           }
           const octokit = new Octokit(
               {
-                auth: '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'
+                auth: credentials.token
               }
           )
           octokit.repos.getContent({
-            owner: 'lozijy',
-            repo: 'typora_notebook',
+            owner: credentials.owner,
+            repo: credentials.repo,
             path:state.string_path
           }).then(result => {
             for (let i = 0; i < result.data.length; i++) {
