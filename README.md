@@ -1,3 +1,5 @@
+写的一个笔记软件，后面会以软件的形式跑。
+在credentials里写用户名，仓库名和token即可，都封装好了
 # github
 
 This template should help get you started developing with Vue 3 in Vite.
