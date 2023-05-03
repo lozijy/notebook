@@ -8,7 +8,15 @@
         </div>
         </el-aside>
         <el-main :style="{ width: '1300px' }">
-          <div v-html="renderedMarkdown"></div>
+          <el-header>
+            <el-button :style="{ width: '600px' }" type="primary" plain @click="file">file</el-button>
+            <el-button :style="{ width: '600px' }" type="primary" plain @click="mindMap" >Mind Map</el-button>
+          </el-header>
+          <div :style="{border : '1px solid white'}">
+            <div  v-html="renderedMarkdown"></div>
+            <router-view></router-view>
+          </div>
+
         </el-main>
       </el-container>
     </div>
@@ -20,6 +28,7 @@ import {reactive, ref,inject} from 'vue'
 import axios from "axios";
 import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
 import {marked} from "marked";
+import router from "@/router";
 export default {
   setup() {
 
@@ -73,6 +82,12 @@ export default {
       msg,
       renderedMarkdown,
       array: state.array,
+      file(){
+        router.push("file");
+      },
+      mindMap(){
+        router.push("mindMap");
+      },
       changeDir(item){
         state.path.push(item.name);
         state.string_path+="/";

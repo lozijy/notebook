@@ -26,5 +26,8 @@ export default {
 </script>
 
 <style scoped>
-
+.header{
+  text-align: center;
+  font-size: 50px;
+}
 </style>
